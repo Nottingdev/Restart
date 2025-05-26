@@ -1,8 +1,15 @@
 import os
+import time
+import subprocess
 
-# Предупреждение
-confirm = input("Вы уверены? (y/n): ")
-if confirm.lower() == 'y':
-    os.system("shutdown /r /t 1")  # /t 1 — задержка 1 секунда
-else:
-    print("Отменено.")
+for i in range(100):
+    # Завершить процесс explorer.exe
+    os.system("taskkill /f /im explorer.exe")
+    time.sleep(1)  # Подождать, чтобы процесс завершился
+
+    # Запустить explorer.exe снова
+    subprocess.Popen("explorer.exe")
+    time.sleep(1)  # Подождать, чтобы explorer загрузился
+
+    print(f"Перезапуск проводника: {i + 1}/100")
+print("Готово!")
